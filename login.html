@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker - Sign In</title>
+    
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--tailwind and daisy UI-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!--font integration-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Manrope:wght@200..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-xl w-[420px] p-8 text-center">
+
+    
+    <div class="flex justify-center mb-4">
+      <div class=" text-white rounded-full p-5">
+       <img src="./assets/github-logo.png" alt="">
+      </div>
+    </div>
+
+  
+    <h1 class="text-xl font-semibold text-gray-800">
+      GitHub Issues Tracker
+    </h1>
+    <p class="text-sm text-gray-500 mb-6">
+      Sign in to manage your issues
+    </p>
+
+ 
+    <form class="text-left">
+
+   
+      <label class="text-sm font-medium text-gray-700">Username</label>
+      <input 
+        type="text"
+        placeholder="Enter Username"
+        class="w-full mt-1 mb-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+      >
+      <p class="text-xs text-purple-600 mb-3">Default: admin</p>
+
+     
+      <label class="text-sm font-medium text-gray-700">Password</label>
+      <input 
+        type="password"
+        placeholder="Enter Password"
+        class="w-full mt-1 mb-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+      >
+      <p class="text-xs text-purple-600 mb-4">Default: admin123</p>
+
+      
+      <button 
+        type="submit"
+        class="w-full py-2 rounded-lg text-white font-medium bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-90">
+        Sign In
+      </button>
+
+    </form>
+
+   
+    <div class="flex items-center my-6">
+      <hr class="flex-grow border-gray-300">
+      <span class="mx-3 text-gray-400 text-sm">OR</span>
+      <hr class="flex-grow border-gray-300">
+    </div>
+
+   
+    <div class="bg-gray-100 rounded-lg p-4 text-sm text-gray-700">
+      <p class="text-gray-500 mb-2">Demo Credentials:</p>
+      <p><strong>Username:</strong> admin</p>
+      <p><strong>Password:</strong> admin123</p>
+    </div>
+
+  </div>
+</body>
+</html>
