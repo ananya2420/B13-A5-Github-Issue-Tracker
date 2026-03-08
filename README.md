@@ -29,10 +29,9 @@ In the arrow function they don't care about this, constructor and hoisted.
 const name = "John";
 
 const message = `Hello ${name}`;
-
+console.log(message);
 
 Live link- snazzy-lolly-ebb1ae.netlify.app
-console.log(message);
 
 
 
