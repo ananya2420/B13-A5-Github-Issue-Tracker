@@ -14,46 +14,67 @@ const loadAll = () => {
 
 
 
-const displayIssues = (issues) => {
+const displayIssues = (issues, forceBorder = null) => {
+
+   document.getElementById("issue-count").innerText = `${issues.length} Issues`;
+
+    let borderColorClass = "";
+    if (forceBorder === "green") {
+        borderColorClass = "border-t-4 border-green-500";
+    } else if (forceBorder === "purple") {
+        borderColorClass = "border-t-4 border-purple-500";
+    } 
+
+
+
     const container = document.getElementById("all-container");
     container.innerHTML = ""; 
     container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6";
 
     issues.forEach(issue => {
-        const card = document.createElement("div");
-        card.className = "bg-white shadow-md rounded-lg p-6 mb-6";
-
-       
-        const createdAt = new Date(issue.createdAt);
-        const formattedDate = createdAt.toLocaleDateString() + " " + createdAt.toLocaleTimeString();
-
-        card.innerHTML = `
-            <h2 class="text-lg font-semibold mb-2">${issue.title}</h2>
-            <p class="text-gray-700 mb-2">${issue.description}</p>
-            
-            <!-- Labels -->
-            <div class="flex gap-2 mb-2">
-                ${issue.labels.map(label => `<span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">${label}</span>`).join("")}
-            </div>
-
-            
-            <div class="flex flex-col gap-1 text-sm text-gray-600">
-                <span><strong>Assignee:</strong> ${issue.assignee || "Unassigned"}</span>
-                <span><strong>Created At:</strong> ${formattedDate}</span>
-            </div>
-
-            
-            <div class="flex justify-end mb-2">
     
-            <span class="text-sm text-gray-500 px-2 py-1 border rounded-md">${issue.priority}</span>
-            </div>
-        `;
+    let cardBorderClass = "";
+    if (forceBorder === "green") {
+        cardBorderClass = "border-t-4 border-green-500";
+    } else if (forceBorder === "purple") {
+        cardBorderClass = "border-t-4 border-purple-500";
+    } else {
+    
+        cardBorderClass = issue.priority === "low"
+            ? "border-t-4 border-purple-500"
+            : "border-t-4 border-green-500";
+    }
 
-          card.addEventListener("click", () => {
+    const card = document.createElement("div");
+    card.className = `bg-white shadow-md rounded-lg p-6 mb-6 cursor-pointer ${cardBorderClass}`;
+
+    const createdAt = new Date(issue.createdAt);
+    const formattedDate = createdAt.toLocaleDateString() + " " + createdAt.toLocaleTimeString();
+
+    card.innerHTML = `
+        <h2 class="text-lg font-semibold mb-2">${issue.title}</h2>
+        <p class="text-gray-700 mb-2">${issue.description}</p>
+
+        <div class="flex gap-2 mb-2">
+            ${issue.labels.map(label => `<span class="bg-yellow-300 text-black-800 px-2 py-1 rounded-full text-xs">${label}</span>`).join("")}
+        </div>
+
+        <div class="flex flex-col gap-1 text-sm text-gray-600">
+            <span><strong>Assignee:</strong> ${issue.assignee || "Unassigned"}</span>
+            <span><strong>Created At:</strong> ${formattedDate}</span>
+        </div>
+
+        <div class="flex justify-end mb-2">
+            <span class="text-sm text-gray-500 px-2 py-1 border rounded-md">${issue.priority}</span>
+        </div>
+    `;
+
+    card.addEventListener("click", () => {
         loadSingleIssue(issue.id);
     });
-        container.appendChild(card);
-    });
+
+    container.appendChild(card);
+});
 }
 
 
@@ -110,16 +131,56 @@ document.addEventListener("DOMContentLoaded", () => {
     loadAll();
 
     const buttons = document.querySelectorAll(".max-w-7xl.mt-6 .flex > button");
+
+
     buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const text = btn.textContent.trim().toLowerCase();
+    btn.addEventListener("click", () => {
+
+        const container = document.getElementById("all-container");
+        container.innerHTML = `<div class="text-center text-gray-500 col-span-full py-10">Loading...</div>`;
+
+        const text = btn.textContent.trim().toLowerCase();
+
+        
+        setTimeout(() => {
             if (text === "all") {
                 displayIssues(allIssues);
             } else if (text === "open") {
-                displayIssues(allIssues.filter(issue => issue.status === "open"));
+                displayIssues(allIssues.filter(issue => issue.status === "open"),"green");
             } else if (text === "closed") {
-                displayIssues(allIssues.filter(issue => issue.status === "closed"));
+                displayIssues(allIssues.filter(issue => issue.status === "closed"), "purple");
             }
-        });
+        }, 300);
     });
 });
+});
+
+//search option work
+ const searchInput = document.querySelector('input[type="text"]');
+    const newIssueBtn = document.querySelector('button.bg-purple-600');
+
+    newIssueBtn.addEventListener("click", () => {
+        const query = searchInput.value.trim();
+        if (!query) {
+            alert("Please enter a search term!");
+            return;
+        }
+       
+
+        const container = document.getElementById("all-container");
+        container.innerHTML = `<div class="text-center text-gray-500 col-span-full py-10">Loading...</div>`;
+
+
+        fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${encodeURIComponent(query)}`)
+        //console.log(fetch)
+            .then(res => res.json())
+            .then(json => {
+                if (json.status === "success") {
+                    displayIssues(json.data);
+                } else {
+                    alert("No issues found for your search!");
+                    displayIssues([]);
+                }
+            })
+            .catch(err => console.error(err));
+    });
