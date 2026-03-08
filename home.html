@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker | home</title>
+
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--tailwind and daisy UI-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!--font integration-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Manrope:wght@200..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+     
+      <div class="flex items-center gap-2">
+       
+        <img src="./assets/github-logo.png" alt="">
+
+        <h1 class="text-lg font-semibold text-gray-800">
+          GitHub Issues Tracker
+        </h1>
+      </div>
+
+      <!-- Right: Search + Button -->
+      <div class="flex items-center gap-4">
+        <input 
+          type="text"
+          placeholder="Search issues..."
+          class="border border-gray-300 rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+
+        <button class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium">
+          + New Issue
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Filter Tabs -->
+  <div class="max-w-7xl mx-auto mt-6 px-6">
+    <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3 w-fit">
+
+      <button class="bg-purple-600 text-white px-6 py-2 rounded-md font-medium">
+        All
+      </button>
+
+      <button class="border border-gray-300 px-6 py-2 rounded-md text-gray-600 hover:bg-gray-100">
+        Open
+      </button>
+
+      <button class="border border-gray-300 px-6 py-2 rounded-md text-gray-600 hover:bg-gray-100">
+        Closed
+      </button>
+
+    </div>
+  </div>
+
+</body>
+</html>
